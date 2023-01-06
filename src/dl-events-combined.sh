@@ -1,17 +1,4 @@
-
-
-#
-#echo "Downloading raw events..."
-#echo '["REQ", "RAND", {"kinds": [1], "limit": 000}]' |
-#  nostcat wss://relay.nostr.ch |
-#  jq '.[2]' > raw
-#echo "Downloading raw events				done"
-#echo "Downloading raw events		:)		done"
-#echo "Downloading raw events				done"
-#
-
-
-LIMIT="5000"
+LIMIT="1000"
 
 
 
@@ -20,7 +7,9 @@ do
 	RELAYSHORT=$(echo "$RELAY" | sed 's/^.\{6\}//')
 	echo $RELAY
 	echo $RELAYSHORT
-echo "Downloading events timestamps from '$RELAY'..."
+echo "Downloading events timestamps"
+
+
 echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
   nostcat "$RELAY" |
   jq '.[2].created_at' > time
@@ -60,7 +49,9 @@ echo " Added | to time 						done"
 # end of slash time
 
 echo "Adding relay directory."
-sed -i 's/$/\/events\/$RELAYSHORT\//' log
+sed -i 's/$/ '$RELAYSHORT'/' log
+sed -i 's/$/\//' log
+
 echo "ok"
 
 #end of add relay name
@@ -75,6 +66,12 @@ sed -i 's/$/.event/' timelogfile
 sed -i 's/\t//g' timelogfile
 
 cat timelogfile | sort -n > $RELAYSHORT.txt
+
+
+mv $RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
+
+done < relay.txt
+
 rm -f file
 rm -f gourceb
 rm -f log
@@ -84,7 +81,7 @@ rm -f time
 rm -f timelog
 rm -f timelogfile
 
-mv $RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
-
-done < relay.txt
+cd ../gourcelogs
+cat *.txt | sort -n > combined_log.txt
+echo ALL DONE.
 

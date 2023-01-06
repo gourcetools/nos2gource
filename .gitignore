@@ -7,3 +7,10 @@ src/tests/timelogfile
 src/tests/time
 src/tests/file
 src/tests/gource
+*.txt
+src/file
+src/log
+src/pubkey
+src/time
+src/timelog
+src/timelogfile
