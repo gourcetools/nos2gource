@@ -50,7 +50,6 @@ wss://nostr.orangepill.dev
 wss://relay-pub.deschooling.us
 wss://relay.cryptocculture.com
 wss://nostr.fly.dev
-wss://nostr-pub.semisol.dev
 wss://satstacker.cloud
 wss://nostr.hyperlingo.com
 wss://nostr-pub1.southflorida.ninja
