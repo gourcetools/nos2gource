@@ -1,7 +1,0 @@
-while read time pubkey
-do
-echo "$time $pubkey"
-done < time
-
-1275543595|andrew|A|src/main.cpp
-$TIME|$PUBKEY|A|$RELAYNAME/X.MESSAGETYPE

@@ -1,14 +1,24 @@
-echo '["REQ", "RAND", {"kinds": [1], "limit": 10}]' |
+echo "Downloading raw events..."
+echo '["REQ", "RAND", {"kinds": [1], "limit": 1000}]' |
   nostcat wss://relay.nostr.ch |
   jq '.[2]' > raw
-echo "Done"
+echo "Downloading raw events				done"
+echo "Downloading raw events		:)		done"
+echo "Downloading raw events				done"
 
-echo '["REQ", "RAND", {"kinds": [1], "limit": 10}]' |
+echo "Downloading events timestamps..."
+echo '["REQ", "RAND", {"kinds": [1], "limit": 1000}]' |
   nostcat wss://relay.nostr.ch |
   jq '.[2].created_at' > time
-echo "Done"
+echo "Downloading events timestamps			done"
+echo "Downloading events timestamps	:)		done"
+echo "Downloading events timestamps			done"
 
-echo '["REQ", "RAND", {"kinds": [1], "limit": 10}]' |
+echo "Downloading events pubkeys..."
+echo '["REQ", "RAND", {"kinds": [1], "limit": 1000}]' |
   nostcat wss://relay.nostr.ch |
   jq '.[2].pubkey' > pubkey
-echo "Done"
+echo "Downloading events pubkeys				done"
+echo "Downloading events pubkeys		:)		done"
+echo "Downloading events pubkeys				done"
+
