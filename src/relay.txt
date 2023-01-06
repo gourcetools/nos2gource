@@ -2,7 +2,6 @@ wss://nostr.coollamer.com
 wss://relay.nostr.bg
 wss://nostr.robotechy.com
 wss://nostr.v0l.io
-wss://relay.nostropolis.xyz
 wss://nostr-relay.alekberg.net
 wss://nostr.8e23.net
 wss://relay.nostr.info
@@ -26,7 +25,6 @@ wss://nostr.gromeul.eu
 wss://nostr.vulpem.com
 wss://nostr.hackerman.pro
 wss://nostr.shadownode.org
-wss://nostr.utxo.lol
 wss://relay.n057r.club
 wss://nostrrelay.com
 wss://nostr1.tunnelsats.com
@@ -82,13 +80,10 @@ wss://nostr.mustardnodes.com
 wss://nostr.shawnyeager.net
 wss://nostr.screaminglife.io
 wss://nostr-relay.trustbtc.org
-wss://nostr-relay.derekross.me
-wss://relay.sendstr.com
 wss://relay.nostr.vision
 wss://nostr.chaker.net
 wss://nostr.zebedee.cloud
 wss://nostr-1.nbo.angani.co
-wss://nostr.whoop.ph
 wss://nostr.mado.io
 wss://nostr1.starbackr.me
 wss://no.str.cr
@@ -101,7 +96,6 @@ wss://no.contry.xyz
 wss://relay.kronkltd.net
 wss://nostr.rewardsbunny.com
 wss://nostr-alpha.gruntwerk.org
-wss://nostr.lnprivate.network
 wss://nostr-relay.freedomnode.com
 wss://nostr.ono.re
 wss://nostr.sandwich.farm
@@ -114,8 +108,6 @@ wss://nostr.shmueli.org
 wss://nostr-dev.wellorder.net
 wss://nostr.orba.ca
 wss://nostr.satsophone.tk
-wss://nostr-pub.wellorder.net
-wss://nostr.oooxxx.ml
 wss://relay.nostr.express
 wss://nostr-verif.slothy.win
 wss://relay.farscapian.com
