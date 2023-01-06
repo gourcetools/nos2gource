@@ -1,7 +1,7 @@
 #!/bin/bash
 #dl-events-combined.sh
 
-LIMIT="2000"
+LIMIT="1000"
 
 echo " == Downloading messages initiated == "
 echo " == We will ask each relay for $LIMIT events ==" 
@@ -41,7 +41,6 @@ do
 	sed -i 's/.$//' pubkey
 	echo "Removed quotes from id... "
 	clear
-	cp id file
 	# end of 02 sed pubkey
 	echo "Adding |A to pubkeys."
 	sed 's/$/|A|/' pubkey > log
@@ -49,7 +48,7 @@ do
 	clear
 	#end of add a
 	echo "Adding | to time.  "
-	sed -i 's/$/|/' time
+	sed  's/$/|/' time > timesed
 	echo "Added | to time"
 	clear
 	# end of slash time
@@ -59,13 +58,14 @@ do
 	echo "Adding relay directory."
 	clear
 	#end of add relay name
-	paste time log > timelog
-	paste timelog pubkey > timelogkey
-	paste timelogkey file > timelogfile
-	sed -i 's/$/.event/' timelogfile
+	paste timesed log > timelog
+	paste timelog id > timelogid
+	sed -i 's/$/\//' timelogid
+	paste timelogid time > timelogidtime
+	sed -i 's/$/.event/' timelogidtime
 	# remove tabulation #
-	sed -i 's/\t//g' timelogfile
-	cat timelogfile | sort -n > $RELAYSHORT.txt
+	sed -i 's/\t//g' timelogidtime
+	cat timelogidtime | sort -n > $RELAYSHORT.txt
 	sed -i 's/ //g' $RELAYSHORT.txt
 	mv $RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
 	echo "Done with $RELAYSHORT"

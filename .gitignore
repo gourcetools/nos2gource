@@ -17,3 +17,7 @@ src/timelogfile
 src/id
 src/timelogkey
 testlogs.sh
+src/timelogid
+src/timelogidtime
+src/timelogtime
+src/timesed
