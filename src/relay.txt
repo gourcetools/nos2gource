@@ -35,7 +35,6 @@ wss://relay.nostr.ro
 wss://nostr.d11n.net
 wss://relay.nostr.ch
 wss://nostr-relay.digitalmob.ro
-wss://relay.realsearch.cc
 wss://nostr.massmux.com
 wss://nostr.nordlysln.net
 wss://nostr.leximaster.com

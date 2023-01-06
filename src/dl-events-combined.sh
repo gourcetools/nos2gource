@@ -1,5 +1,7 @@
-LIMIT="1000"
-
+LIMIT="10"
+cd ../gourcelogs
+rm -f *.*
+cd ../src
 
 
 while read RELAY
@@ -66,6 +68,7 @@ sed -i 's/$/.event/' timelogfile
 sed -i 's/\t//g' timelogfile
 
 cat timelogfile | sort -n > $RELAYSHORT.txt
+sed -i 's/ //g' $RELAYSHORT.txt
 
 
 mv $RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
@@ -82,6 +85,9 @@ rm -f timelog
 rm -f timelogfile
 
 cd ../gourcelogs
-cat *.txt | sort -n > combined_log.txt
+cat *.txt | sort -n > combined.txt
+echo ALL DONE
+gource combined.txt
+cd ../src
 echo ALL DONE.
 
