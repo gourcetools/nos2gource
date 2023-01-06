@@ -1,7 +1,7 @@
 #!/bin/bash
 #dl-events-combined.sh
 
-LIMIT="2000"
+LIMIT="100"
 
 echo " == Downloading messages initiated == "
 echo " == We will ask each relay for $LIMIT events ==" 
@@ -25,23 +25,15 @@ do
   	nostcat "$RELAY" |
   	jq '.[2].pubkey' > pubkey
 	clear
-	echo "Downloading $LIMIT events id from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
- 	nostcat "$RELAY" |
-  	jq '.[2].id' > id
 	# end of 01 dl 
-	echo "Removing quotes from id."
-	sed -i 's/^.//' id
-	echo "Removing quotes from id.."
-	echo "Removing quotes from id..."
-	sed -i 's/.$//' id
-	echo "Removed quotes from id... "
-	echo "Removing quotes from pubkey"
+	echo "Removing quotes from pubkeys."
 	sed -i 's/^.//' pubkey
+	echo "Removing quotes from pubkeys.."
+	echo "Removing quotes from pubkeys..."
 	sed -i 's/.$//' pubkey
-	echo "Removed quotes from id... "
+	echo "Removed quotes from pubkeys... 
 	clear
-	cp id file
+	cp pubkey file
 	# end of 02 sed pubkey
 	echo "Adding |A to pubkeys."
 	sed 's/$/|A|/' pubkey > log
@@ -56,12 +48,13 @@ do
 	echo "Adding relay directory."
 	sed -i 's/$/ '$RELAYSHORT'/' log
 	sed -i 's/$/\//' log
+	sed -i 's/$/ '$RELAYSHORT'/' log
+	sed -i 's/$/\//' log
 	echo "Adding relay directory."
 	clear
 	#end of add relay name
 	paste time log > timelog
-	paste timelog pubkey > timelogkey
-	paste timelogkey file > timelogfile
+	paste timelog file > timelogfile
 	sed -i 's/$/.event/' timelogfile
 	# remove tabulation #
 	sed -i 's/\t//g' timelogfile

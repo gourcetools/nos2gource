@@ -14,3 +14,6 @@ src/pubkey
 src/time
 src/timelog
 src/timelogfile
+src/id
+src/timelogkey
+testlogs.sh
