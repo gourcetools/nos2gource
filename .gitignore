@@ -6,3 +6,4 @@ src/tests/timelog
 src/tests/timelogfile
 src/tests/time
 src/tests/file
+src/tests/gource
