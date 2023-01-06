@@ -1,4 +1,4 @@
-LIMIT="1"
+LIMIT="1000"
 cd ../gourcelogs
 rm -f *.*
 cd ../src
@@ -61,7 +61,7 @@ rm -f timelogfile
 
 cd ../gourcelogs
 cat *.txt | sort -n > combined.txt
-awk '!x[substr($0, 1, 6)]++' combined.txt
+awk '!x[substr($0, 1, 12)]++' combined.txt
 echo ALL DONE LETS START GOURCE.
 gource combined.txt
 cd ../src
