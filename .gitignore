@@ -1,2 +1,8 @@
 
 src/tests/gource
+src/tests/log
+src/tests/pubkey
+src/tests/timelog
+src/tests/timelogfile
+src/tests/time
+src/tests/file

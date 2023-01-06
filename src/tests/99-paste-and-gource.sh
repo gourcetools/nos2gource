@@ -1,11 +1,15 @@
 
 paste time log > timelog
-paste timelog file > gource
+paste timelog file > timelogfile
 
-sed -i 's/$/.event/' gource
+sed -i 's/$/.event/' timelogfile
+
 # remove tabulation #
-sed -i 's/\t//g' gource
-gource gource
+sed -i 's/\t//g' timelogfile
+
+cat timelogfile | sort -n > gource
+
+gource --realtime gource
 rm -f file
 rm -f gourceb
 rm -f log
