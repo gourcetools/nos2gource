@@ -17,3 +17,4 @@ rm -f pubkey
 rm -f raw 
 rm -f time
 rm -f timelog
+rm -f timelogfile

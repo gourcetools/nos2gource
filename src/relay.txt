@@ -1,0 +1,4 @@
+wss://nostr.coollamer.com
+wss://relay.nostr.bg
+wss://nostr.robotechy.com
+
