@@ -1,6 +1,7 @@
 wss://nostr.coollamer.com
 wss://relay.nostr.bg
 wss://nostr.robotechy.com
+wss://nostr.utxo.lol
 wss://nostr.v0l.io
 wss://nostr-relay.alekberg.net
 wss://nostr.8e23.net

@@ -1,4 +1,4 @@
-LIMIT="100"
+LIMIT="10"
 cd ../gourcelogs
 rm -f *.*
 cd ../src
@@ -65,8 +65,8 @@ rm -f time
 rm -f timelog
 rm -f timelogfile
 
+
 cd ../gourcelogs
-rm `find ./ -type f -empty`
 for file in *
 do
 	gource --start-date "2040-01-01 12:00" $file 2> ../logs/$file
@@ -74,11 +74,12 @@ do
 done
 cd ../logs
 find . -type f -name "*.txt" -size -69c -delete
-
 for file in *
 do
-	cd ../gourcelog rm -f $file
-	echo " === Purged $file . Something went wrong so we removed this log. === "
+	cd ../gourcelogs
+	rm -f "$file"
+	echo " === Purged "$file" . Something went wrong so we removed this log. === "
+	cd ../logs
 done
 
 
@@ -87,7 +88,7 @@ cd ../gourcelogs
 cat *.txt | sort -u > combined.txt
 
 echo "ALL DONE LETS START GOURCE."
-gource combined.txt
+gource combined.txt 
 cd ../src
 echo "ALL DONE."
 
