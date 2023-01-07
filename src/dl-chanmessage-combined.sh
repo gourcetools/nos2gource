@@ -23,7 +23,7 @@ do
 	echo "Downloading $LIMIT events chancreation		from: $RELAYSHORT"
 	echo '["REQ", "RAND", {"kinds": [42], "limit": '$LIMIT'}]' |
  	nostcat "$RELAY" |
-  	jq '.[2].chancreation' > ../tmp/chancreation
+  	jq '.[2].content' > ../tmp/chancreation
 	# end of Download
 	echo "Removing quotes from chancreation."
 	sed -i 's/^.//' ../tmp/chancreation
@@ -51,17 +51,17 @@ do
 	#end of add relay name
 	paste ../tmp/timesed ../tmp/log > ../tmp/timelog
 	paste ../tmp/timelog ../tmp/chancreation > ../tmp/timelogchancreation
-	sed -i 's/$/\//' ../tmp/timelogchancreation
-	paste ../tmp/timelogchancreation ../tmp/time > ../tmp/timelogchancreationtime
+	# sed -i 's/$/\//' ../tmp/timelogchancreation
+	# paste ../tmp/timelogchancreation ../tmp/time > ../tmp/timelogchancreationtime
 	
-	echo "Adding EXTENSION directory."
-	sed -i 's/$/ '.$EXTENSION'/' ../tmp/timelogchancreationtime
-	echo "Adding relay directory."
+	# echo "Adding EXTENSION directory."
+	# sed -i 's/$/ '.$EXTENSION'/' ../tmp/timelogchancreationtime
+	# echo "Adding relay directory."
 
 	# remove tabulation #
-	sed -i 's/\t//g' ../tmp/timelogchancreationtime
-	cat ../tmp/timelogchancreationtime | sort -n > ../tmp/$RELAYSHORT.txt
-	sed -i 's/ //g' ../tmp/$RELAYSHORT.txt
+	# sed -i 's/\t//g' ../tmp/timelogchancreationtime
+	cat ../tmp/timelogchancreation | sort -n > ../tmp/$RELAYSHORT.txt
+	# sed -i 's/ //g' ../tmp/$RELAYSHORT.txt
 	mv ../tmp/$RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
 	echo "Done with $RELAYSHORT"
 	echo "Next"
