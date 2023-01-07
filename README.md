@@ -13,16 +13,11 @@ It's just...funny..<br>
 
 # <b>⚙️ Requirements:</b><br>
 - `nostcat` , `gource` <br>
+- https://github.com/blakejakopovic/nostcat <br>
+- https://github.com/acaudwell/Gource/    <br>
 - Optional: `FFmpeg` for recording with gource<br>
 <br>
 
-# Links 
-
-<br>
- `nostcat` : https://github.com/blakejakopovic/nostcat <br>
- `gource` : https://github.com/acaudwell/Gource/    <br>
-
- <br>
  
 # <b>✔️ How to use nos2gource?</b><br>
 1) 📜  Open <b>relays.txt</b> and replace links with desired URLs - one link per line.<br>
