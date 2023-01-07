@@ -29,7 +29,7 @@ It's just...funny..<br>
 
 🙋‍♂️ Need help? Telegram: <b>@bitpaint</b> | Twitter: <b>@bitpaintclub<br></b>
 
-`cargo install nostcat`
-`git clone https://github.com/gourcetools/nos2gource`
-`cd ./nos2gource`
-`./src/dl*`
+`cargo install nostcat` <br>
+`git clone https://github.com/gourcetools/nos2gource` <br>
+`cd ./nos2gource` <br>
+`./src/dl*` <br>
