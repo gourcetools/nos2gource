@@ -21,3 +21,5 @@ src/timelogid
 src/timelogidtime
 src/timelogtime
 src/timesed
+gourcelogs/combined_events
+logs/combined_events

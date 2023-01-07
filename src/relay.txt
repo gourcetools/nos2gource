@@ -1,3 +1,5 @@
-wss://nostr.developer.li
-wss://nostr.openchain.fr
-wss://nostr.mrbits.it
+wss://nostr.shadownode.org	
+wss://nostr.openchain.fr		
+wss://nostrrelay.com		
+wss://relay.r3d.red			
+wss://nostr.v0l.io
