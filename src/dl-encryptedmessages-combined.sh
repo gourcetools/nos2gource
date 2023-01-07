@@ -2,7 +2,7 @@
 #dl-events-combined.sh
 
 # Set this variable to the maximum events you want to recieve from each relay
-LIMIT="100000"
+LIMIT="100"
 
 echo " == Downloading messages initiated == "
 echo " == We will ask each relay for $LIMIT events ==" 
@@ -13,28 +13,28 @@ do
 	EXTENSION=$(echo ${RELAYSHORT##*.})
 	echo "Downloading $LIMIT events	 from: $RELAYSHORT"
 	echo "Downloading $LIMIT timestamps		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
+	echo '["REQ", "RAND", {"kinds": [4], "limit": '$LIMIT'}]' |
  	nostcat "$RELAY" |
   	jq '.[2].created_at' > ../tmp/time
 	echo "Downloading $LIMIT pubkeys		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
+	echo '["REQ", "RAND", {"kinds": [4], "limit": '$LIMIT'}]' |
   	nostcat "$RELAY" |
   	jq '.[2].pubkey' > ../tmp/pubkey
-	echo "Downloading $LIMIT events id		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
+	echo "Downloading $LIMIT events content		from: $RELAYSHORT"
+	echo '["REQ", "RAND", {"kinds": [4], "limit": '$LIMIT'}]' |
  	nostcat "$RELAY" |
-  	jq '.[2].id' > ../tmp/id
+  	jq '.[2].content' > ../tmp/content
 	# end of Download
-	echo "Removing quotes from id."
-	sed -i 's/^.//' ../tmp/id
-	echo "Removing quotes from id.."
-	echo "Removing quotes from id..."
-	sed -i 's/.$//' ../tmp/id
-	echo "Removed quotes from id... "
+	echo "Removing quotes from content."
+	sed -i 's/^.//' ../tmp/content
+	echo "Removing quotes from content.."
+	echo "Removing quotes from content..."
+	sed -i 's/.$//' ../tmp/content
+	echo "Removed quotes from content... "
 	echo "Removing quotes from pubkey"
 	sed -i 's/^.//' ../tmp/pubkey
 	sed -i 's/.$//' ../tmp/pubkey
-	echo "Removed quotes from id... "
+	echo "Removed quotes from content... "
 	# end of 02 sed pubkey
 	echo "Adding |A to pubkeys."
 	sed 's/$/|A|/' ../tmp/pubkey > ../tmp/log
@@ -50,17 +50,17 @@ do
 	echo "Adding relay directory."
 	#end of add relay name
 	paste ../tmp/timesed ../tmp/log > ../tmp/timelog
-	paste ../tmp/timelog ../tmp/id > ../tmp/timelogid
-	sed -i 's/$/\//' ../tmp/timelogid
-	paste ../tmp/timelogid ../tmp/time > ../tmp/timelogidtime
+	paste ../tmp/timelog ../tmp/content > ../tmp/timelogcontent
+	sed -i 's/$/\//' ../tmp/timelogcontent
+	paste ../tmp/timelogcontent ../tmp/time > ../tmp/timelogcontenttime
 	
 	echo "Adding EXTENSION directory."
-	sed -i 's/$/ '.$EXTENSION'/' ../tmp/timelogidtime
+	sed -i 's/$/ '.$EXTENSION'/' ../tmp/timelogcontenttime
 	echo "Adding relay directory."
 
 	# remove tabulation #
-	sed -i 's/\t//g' ../tmp/timelogidtime
-	cat ../tmp/timelogidtime | sort -n > ../tmp/$RELAYSHORT.txt
+	sed -i 's/\t//g' ../tmp/timelogcontenttime
+	cat ../tmp/timelogcontenttime | sort -n > ../tmp/$RELAYSHORT.txt
 	sed -i 's/ //g' ../tmp/$RELAYSHORT.txt
 	mv ../tmp/$RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
 	echo "Done with $RELAYSHORT"
@@ -116,9 +116,9 @@ done
 
 
 cd ../gourcelogs
-cat *.txt | sort -u > ../combined_events
-sed -i 's/ //g' ../combined_events
-sed -i 's/\t//g' ../combined_events
+cat *.txt | sort -u > ../combined-recommand
+sed -i 's/ //g' ../combined-recommand
+sed -i 's/\t//g' ../combined-recommand
 
 echo "ALL DONE LETS START GOURCE."
 
@@ -129,7 +129,7 @@ rm -f ../logs/*
 rm -f ../gourcelogs/*
 rm -f ../tmp/*
 gource \
-    ../combined_events \
+    ../combined-recommand \
     --seconds-per-day "5" \
     --padding 1.30 \
     --bloom-intensity 0.01 \
