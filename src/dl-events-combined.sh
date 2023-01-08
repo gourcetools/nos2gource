@@ -1,8 +1,9 @@
+
 #!/bin/bash
 #dl-events-combined.sh
 
 # Set this variable to the maximum events you want to recieve from each relay
-LIMIT="100000"
+LIMIT="100"
 
 echo " == Downloading messages initiated == "
 echo " == We will ask each relay for $LIMIT events ==" 
@@ -14,15 +15,15 @@ do
 	echo "Downloading $LIMIT events	 from: $RELAYSHORT"
 	echo "Downloading $LIMIT timestamps		from: $RELAYSHORT"
 	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
- 	nostcat "$RELAY" |
+ 		nostcat --connect-timeout 250 "$RELAY" |
   	jq '.[2].created_at' > ../tmp/time
 	echo "Downloading $LIMIT pubkeys		from: $RELAYSHORT"
 	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
-  	nostcat "$RELAY" |
+  	nostcat --connect-timeout 250 "$RELAY" |
   	jq '.[2].pubkey' > ../tmp/pubkey
 	echo "Downloading $LIMIT events id		from: $RELAYSHORT"
 	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
- 	nostcat "$RELAY" |
+ 		nostcat --connect-timeout 250 "$RELAY" |
   	jq '.[2].id' > ../tmp/id
 	# end of Download
 	echo "Removing quotes from id."
