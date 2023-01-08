@@ -117,9 +117,9 @@ done
 
 
 cd ../gourcelogs
-cat *.txt | sort -u > ../combined_events
-sed -i 's/ //g' ../combined_events
-sed -i 's/\t//g' ../combined_events
+cat *.txt | sort -u > ../combined-events
+sed -i 's/ //g' ../combined-events
+sed -i 's/\t//g' ../combined-events
 
 echo "ALL DONE LETS START GOURCE."
 
@@ -130,7 +130,7 @@ rm -f ../logs/*
 rm -f ../gourcelogs/*
 rm -f ../tmp/*
 gource \
-    ../combined_events \
+    ../combined-events \
     --seconds-per-day "5" \
     --padding 1.30 \
     --bloom-intensity 0.01 \
