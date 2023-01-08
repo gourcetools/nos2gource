@@ -1,18 +1,18 @@
+
 #!/bin/bash
-#dl-events-combined.sh
+#dl-chancreation-combined.sh
 
 # ================================== CONFIG START
 
-KIND="2"
+KIND="40"
 # Set this variable to the kind of  events you want to recieve from each relay
 LIMIT="1000"
 # Set this variable to the maximum events you want to recieve from each relay
-TYPE="public-recommend"
+TYPE="channel-creation"
 # Set this variable to the name of this folder inside gource relay
-OUTPUT="combined-recommend"
+OUTPUT="combined-chan-creation "
 # Set this variable to the desired gource output file name
 # ================================== CONFIG END
-
 
 
 rm -f ../logs/*
@@ -21,7 +21,8 @@ rm -f ../tmp/*
 
 
 
-echo " == Downloading messages initiated"
+
+echo " == Downloading chancreation initiated"
 echo " == We will ask each relay for $LIMIT events" 
 
 
@@ -126,7 +127,7 @@ for file in *
 do
 	cd ../gourcelogs
 	rm -f "$file"
-	echo " == =============="
+	echo " ================"
 	echo " == Deleted "$file" =="
 	echo " == Something went wrong with this log. =="
 	cd ../logs
@@ -143,8 +144,8 @@ sed -i 's/ //g' ../$OUTPUT
 sed -i 's/\t//g' ../$OUTPUT
 
 cd ..
-cat $OUTPUT | awk '!seen[substr($0,1,74)]++' > $OUTPUT.2
+cat $OUTPUT | awk '!seen[substr($0,1,74)]++' > "$OUTPUT"new
 rm -f $OUTPUT
-cp $OUTPUT.2 $OUTPUT
-rm -f $OUTPUT.2
+cp -f "$OUTPUT"new $OUTPUT
+rm -f "$OUTPUT"new
 cd src

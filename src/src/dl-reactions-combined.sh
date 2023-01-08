@@ -3,13 +3,13 @@
 
 # ================================== CONFIG START
 
-KIND="2"
+KIND="7"
 # Set this variable to the kind of  events you want to recieve from each relay
 LIMIT="1000"
 # Set this variable to the maximum events you want to recieve from each relay
-TYPE="public-recommend"
+TYPE="reaction"
 # Set this variable to the name of this folder inside gource relay
-OUTPUT="combined-recommend"
+OUTPUT="combined-reaction"
 # Set this variable to the desired gource output file name
 # ================================== CONFIG END
 

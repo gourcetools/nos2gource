@@ -1,75 +1,95 @@
-
 #!/bin/bash
 #dl-events-combined.sh
 
-# Set this variable to the maximum events you want to recieve from each relay
-LIMIT="100"
+# ================================== CONFIG START
 
-echo " == Downloading messages initiated == "
-echo " == We will ask each relay for $LIMIT events ==" 
+KIND="1"
+# Set this variable to the kind of  events you want to recieve from each relay
+LIMIT="1000"
+# Set this variable to the maximum events you want to recieve from each relay
+TYPE="public-messages"
+# Set this variable to the name of this folder inside gource relay
+OUTPUT="combined-public-messages"
+# Set this variable to the desired gource output file name
+# ================================== CONFIG END
+
+
+
+rm -f ../logs/*
+rm -f ../gourcelogs/*
+rm -f ../tmp/*
+
+
+
+echo " == Downloading messages initiated"
+echo " == We will ask each relay for $LIMIT events" 
+
 
 while read RELAY
 do
 	RELAYSHORT=$(echo "$RELAY" | sed 's/^.\{6\}//')
 	EXTENSION=$(echo ${RELAYSHORT##*.})
-	echo "Downloading $LIMIT events	 from: $RELAYSHORT"
-	echo "Downloading $LIMIT timestamps		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
- 		nostcat --connect-timeout 250 "$RELAY" |
-  	jq '.[2].created_at' > ../tmp/time
-	echo "Downloading $LIMIT pubkeys		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
+	echo " == Downloading $LIMIT timestamps		from: $RELAYSHORT"
+	echo '["REQ","RAND", {"kinds": ['$KIND'],"limit": '$LIMIT'}]' |
+ 	nostcat --connect-timeout 250 "$RELAY" |
+  	jq '.[2].created_at' > ../tmp/date
+echo " == Done downloading. =="
+	
+	echo " == Downloading $LIMIT pubkeys		from: $RELAYSHORT"
+	echo '["REQ","RAND", {"kinds": ['$KIND'],"limit": '$LIMIT'}]' |
   	nostcat --connect-timeout 250 "$RELAY" |
   	jq '.[2].pubkey' > ../tmp/pubkey
-	echo "Downloading $LIMIT events id		from: $RELAYSHORT"
-	echo '["REQ", "RAND", {"kinds": [1], "limit": '$LIMIT'}]' |
- 		nostcat --connect-timeout 250 "$RELAY" |
+		echo " == Done downloading. =="
+
+	echo " == Downloading $LIMIT events		from: $RELAYSHORT"
+	echo '["REQ","RAND", {"kinds": ['$KIND'],"limit": '$LIMIT'}]' |
+ 	nostcat --connect-timeout 250 "$RELAY" |
   	jq '.[2].id' > ../tmp/id
+echo " == Done downloading. =="	
 	# end of Download
-	echo "Removing quotes from id."
+	
+
+	echo " == Removing quotes from id. =="
 	sed -i 's/^.//' ../tmp/id
-	echo "Removing quotes from id.."
-	echo "Removing quotes from id..."
 	sed -i 's/.$//' ../tmp/id
-	echo "Removed quotes from id... "
-	echo "Removing quotes from pubkey"
+	echo " == Removing quotes from pubkey. =="
 	sed -i 's/^.//' ../tmp/pubkey
 	sed -i 's/.$//' ../tmp/pubkey
-	echo "Removed quotes from id... "
 	# end of 02 sed pubkey
-	echo "Adding |A to pubkeys."
+	echo " == Adding |A to pubkeys. =="
 	sed 's/$/|A|/' ../tmp/pubkey > ../tmp/log
-	echo "Added |A to pubkeys..."
 	#end of add A
-	echo "Adding | to time.  "
-	sed  's/$/|/' ../tmp/time > ../tmp/timesed
-	echo "Added | to time"
-	# end of slash time
-	echo "Adding relay directory."
-	sed -i 's/$/ '$RELAYSHORT'/' ../tmp/log
-	sed -i 's/$/\//' ../tmp/log
-	echo "Adding relay directory."
+	echo " == Adding  to date. "
+	sed  's/$/|/' ../tmp/date > ../tmp/datesed
+	# end of slash date
+	# == Adding relay director
+	sed -i 's/$/ '$RELAYSHORT'/' ../tmp/log				 
+	sed -i 's/$/\//' ../tmp/log										
+	
+	sed -i 's/$/ '$TYPE'/' ../tmp/log				 
+	sed -i 's/$/\//' ../tmp/log				
+	
+	
+	
 	#end of add relay name
-	paste ../tmp/timesed ../tmp/log > ../tmp/timelog
-	paste ../tmp/timelog ../tmp/id > ../tmp/timelogid
-	sed -i 's/$/\//' ../tmp/timelogid
-	paste ../tmp/timelogid ../tmp/time > ../tmp/timelogidtime
+	paste ../tmp/datesed ../tmp/log > ../tmp/datelog
+	paste ../tmp/datelog ../tmp/id > ../tmp/datelogid
+	sed -i 's/$/\//' ../tmp/datelogid
+	paste ../tmp/datelogid ../tmp/date > ../tmp/datelogiddate
 	
 	echo "Adding EXTENSION directory."
-	sed -i 's/$/ '.$EXTENSION'/' ../tmp/timelogidtime
+	sed -i 's/$/ '.$EXTENSION'/' ../tmp/datelogiddate
 	echo "Adding relay directory."
 
 	# remove tabulation #
-	sed -i 's/\t//g' ../tmp/timelogidtime
-	cat ../tmp/timelogidtime | sort -n > ../tmp/$RELAYSHORT.txt
+	sed -i 's/\t//g' ../tmp/datelogiddate
+	cat ../tmp/datelogiddate | sort -n > ../tmp/$RELAYSHORT.txt
 	sed -i 's/ //g' ../tmp/$RELAYSHORT.txt
 	mv ../tmp/$RELAYSHORT.txt ../gourcelogs/$RELAYSHORT.txt
 	echo "Done with $RELAYSHORT"
 	echo "Next"
+	
 done < ../relays.txt
-# Removing logs that failed for sure #
-cd ../gourcelogs
-find . -type f -name "*.txt" -size -69c -delete
 
 
 # THIS IS DONE AS A SAFETY MEASURE BECAUSE SOMETIMES RELAYS OUTPUT SHIT
@@ -87,11 +107,12 @@ find . -type f -name "*.txt" -size -69c -delete
 	# if it fail to read the log, it wont start and output the error.
 	# Until we find a way to run gource in the background,
 	# this step will keep  opening gource windows in a annoying manner each time its testing a log.
-	
+
+cd ../gourcelogs
 for file in *
 	do
 	gource --start-date "2200-01-01 12:00" "$file" 2> ../logs/$file
-	echo " === Testing $file === "
+	echo " == Testing $file"
 done
 
 cd ../logs
@@ -105,9 +126,9 @@ for file in *
 do
 	cd ../gourcelogs
 	rm -f "$file"
-	echo " ====================== "
-	echo " === Deleted "$file" == "
-	echo " === Something went wrong with this log === "
+	echo " == =============="
+	echo " == Deleted "$file" =="
+	echo " == Something went wrong with this log. =="
 	cd ../logs
 done
 
@@ -117,26 +138,13 @@ done
 
 
 cd ../gourcelogs
-cat *.txt | sort -u > ../combined-events
-sed -i 's/ //g' ../combined-events
-sed -i 's/\t//g' ../combined-events
+cat *.txt | sort -u > ../$OUTPUT
+sed -i 's/ //g' ../$OUTPUT
+sed -i 's/\t//g' ../$OUTPUT
 
-echo "ALL DONE LETS START GOURCE."
-
-## Create CURRENTDATE & GOURCESTARTDATE variable ##
-CURRENTDATE=`date +"%Y-%m-%d"`
-GOURCESTARTDATE=`date -d '-365day' +"%Y-%m-%d"`
-rm -f ../logs/*
-rm -f ../gourcelogs/*
-rm -f ../tmp/*
-gource \
-    ../combined-events \
-    --seconds-per-day "5" \
-    --padding 1.30 \
-    --bloom-intensity 0.01 \
-    --camera-mode overview \
-    --user-font-size "1" \
-    --dir-name-position "1" \
-		--dir-font-size "40" \
-    --dir-name-depth 1 \
-    --hide "users,usernames,filenames,root,tree" 
+cd ..
+cat $OUTPUT | awk '!seen[substr($0,1,74)]++' > $OUTPUT.2
+rm -f $OUTPUT
+cp $OUTPUT.2 $OUTPUT
+rm -f $OUTPUT.2
+cd src
