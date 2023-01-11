@@ -1,3 +1,7 @@
+mkdir ../tmp
+mkdir ../gourcelogs
+mkdir ../logs
+
 ./dl-recom*
 ./dl-react*
 ./dl-event*
