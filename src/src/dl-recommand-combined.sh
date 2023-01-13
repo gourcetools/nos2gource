@@ -116,7 +116,7 @@ for file in *
 done
 
 cd ../logs
-find . -type f -name "*.txt" -size -69c -delete
+find . -type f -name "*.txt" -size -100c -delete
 
 # Because the name of the failed log output file correspond to the name of the log file
 # we delete each file in log that exist also in logfiles, doing this we only have 
