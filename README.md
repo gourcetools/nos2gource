@@ -21,7 +21,7 @@ It's just...funny.. still early stage. im sorry.<br>
  
 # <b>✔️ How to use nos2gource?</b><br>
 1) 📜  Open <b>relays.txt</b> and replace links with desired URLs - one link per line.<br>
-2) 🧰  Launch ./dl* script, you can edit the variable to change how many events you ask each relays.
+2) 🧰  Launch `./src/src/run-all.sh` , you can edit the variables inside each script to change how many events you ask each relays. 
 3) ⌛  Wait
 4) 😃  You should see a gource now.<br>
 <br>
