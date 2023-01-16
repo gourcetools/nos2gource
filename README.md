@@ -6,9 +6,9 @@
 
 # <b>🍩 What is nos2gource?</b><br>
 <br>
-<b>nos2gource is a low level coding bash script made to display nostr events inside Gource.</b><br>
+<b>nos2gource is a a collection of bash script made to convert nostr events to Gource visualisation.</b><br>
 It's main purpose it to download events from <b>multiple</b> relays, create logs, combine them into one big file that we can open with Gource.<br>
-It's just...funny..<br>
+It's just...funny.. still early stage. im sorry.<br>
 <br>
 
 # <b>⚙️ Requirements:</b><br>
@@ -29,7 +29,8 @@ It's just...funny..<br>
 
 🙋‍♂️ Need help? Telegram: <b>@bitpaint</b> | Twitter: <b>@bitpaintclub<br></b>
 
+you can edit relay list inside the src/Relays.txt
 `cargo install nostcat` <br>
 `git clone https://github.com/gourcetools/nos2gource` <br>
 `cd ./nos2gource` <br>
-`./src/dl*` <br>
+`./src/src/run-all.sh` <br>
