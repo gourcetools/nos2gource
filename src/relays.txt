@@ -1,3 +1,5 @@
 wss://nos.lol
 wss://nostrrelay.com
 wss://nostr.nodeofsven.com
+wss://nostr.slothy.win
+wss://relay.nostr.info

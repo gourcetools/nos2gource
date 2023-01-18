@@ -1,6 +1,6 @@
-mkdir ../tmp
-mkdir ../gourcelogs
-mkdir ../logs
+mkdir -p ../tmp
+mkdir -p ../gourcelogs
+mkdir -p ../logs
 
 ./dl-recom*
 ./dl-react*

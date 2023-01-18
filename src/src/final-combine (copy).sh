@@ -7,8 +7,8 @@ cd ..
 cat combined* | sort -u > ./final.txt
 
 gource \
-    final.txt \
-    --seconds-per-day "0.1" \
+    combined-private-messages \
+    --seconds-per-day "5" \
     --padding 1.30 \
     --bloom-intensity 0.01 \
     --camera-mode overview \

@@ -1,2 +1,2 @@
-cd ./src/menu
-./START.sh
+cd ./src/src
+./run-all.sh
