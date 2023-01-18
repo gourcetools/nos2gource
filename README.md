@@ -2,6 +2,8 @@
 # <b>nos2gource</b>                  <br>
 <img src="https://img.shields.io/badge/License-MIT-orange.svg"> <br> <br>
  <img src="https://nostr.build/i/2226.png" alt="Combined" width="500px"> <br> <br>
+  <img src="https://user-images.githubusercontent.com/120996278/213193492-dee2414e-4127-4d27-ba41-c6e6fcbc68bb.png" alt="rickrolld" width="500px"> <br> <br>
+
 
 
 # <b>🍩 What is nos2gource?</b><br>
@@ -33,4 +35,5 @@ you can edit relay list inside the src/Relays.txt
 `cargo install nostcat` <br>
 `git clone https://github.com/gourcetools/nos2gource` <br>
 `cd ./nos2gource` <br>
+edit relays.txt and put the relays you want to get infor from, one per line. <br>
 `./src/src/run-all.sh` <br>
